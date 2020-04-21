@@ -12,10 +12,15 @@ function App() {
   return (
     <Router>
     <div className="App">
-      <h1>Friends!</h1>
+      <header>
+        <nav>
+          <Link to="/login">Login</Link>
+          <Link to="/protected">FriendsList</Link>
+        </nav>
+      </header>
       <Switch>
-        <PrivateRoute exact path="/protected" componenet={FriendsList} />
-        <Route path="/login" componenet={Login}/>
+        <PrivateRoute exact path="/protected" component={FriendsList} />
+        <Route path="/login" component={Login}/>
         <Route component={Login}/>
       </Switch>
     </div>

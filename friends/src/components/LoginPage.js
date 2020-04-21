@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import {axiosWithAuth} from "../utils/axiosWithAuth";
 
 
-export const Login = () => {
+export const Login = (props) => {
     const [credentials, setCredentials] = useState({
         
             username: '',
@@ -25,7 +25,7 @@ export const Login = () => {
         .post('/api/login', credentials)
         .then(response => {
             localStorage.setItem('token', JSON.stringify(response.data.payload));
-            this.props.history.push('/protected')
+            props.history.push('/protected')
         })
     }
 
@@ -48,7 +48,7 @@ export const Login = () => {
                 placeholder="Password:"
                 onChange={handleChange}
             />
-            <button>Log In</button>
+            <input type="submit"/>
             </form>
         </div>
     )
