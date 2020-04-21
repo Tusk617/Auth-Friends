@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 import {Login} from "./components/LoginPage";
 
 function App() {
+
   return (
     <Router>
     <div className="App">
