@@ -5,12 +5,15 @@ import {axiosWithAuth} from "../utils/axiosWithAuth";
 
 export const FriendsList = () => {
     const [friend, setFriend] = useState({
+        friends: []
+    })
+    const [newFriend, setNewFriend] = useState({
         id: 0,
         name: '',
         age: 0,
         email: '',
-        friends: []
     })
+
 
     useEffect(() => {
         axiosWithAuth().get('/api/friends')
@@ -21,29 +24,53 @@ export const FriendsList = () => {
                 friends: response.data
             })
         })
-    }, [])
+    }, [setFriend])
+
+    const handleChange = (event) => {
+        
+        setNewFriend({
+            ...newFriend,
+            [event.target.name]: event.target.value
+        })
+    }
+
+    const addNewFriend = (event) => {
+        event.preventDefault()
+        axiosWithAuth().post("/api/friends", newFriend)
+        .then(response => {
+            console.log(response)
+        })
+    }
+    
     
 
 
     return (
         <div>
             <h1>Your Current Friends:</h1>
-            <form>
+            <form onSubmit={addNewFriend}>
                 <input 
                     type="text"
-                    name="friendName"
+                    name="name"
                     placeholder="Friends Name"
+                    value={newFriend.name}
+                    onChange={handleChange}
                 /><br/>
                 <input 
                     type="text"
-                    name="friendAge"
+                    name="age"
                     placeholder="Friends Age"
+                    value={newFriend.age}
+                    onChange={handleChange}
                 /><br/>
                 <input 
                     type="email"
-                    name="friendEmail"
+                    name="email"
                     placeholder="Friends Email"
-                />
+                    value={newFriend.email}
+                    onChange={handleChange}
+                /><br/>
+                <input type="submit"/>
                 <div className="FriendsList">
                     {friend.friends.map(person => {
                        return <>
