@@ -35,7 +35,7 @@ export const FriendsList = () => {
     }
 
     const addNewFriend = (event) => {
-        event.preventDefault()
+        // event.preventDefault()
         axiosWithAuth().post("/api/friends", newFriend)
         .then(response => {
             console.log(response)
