@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {axiosWithAuth} from "../utils/axiosWithAuth";
+import {Card, CardTitle, CardText, CardHeader} from 'reactstrap';
 
 
 export const FriendsList = () => {
@@ -46,7 +47,8 @@ export const FriendsList = () => {
 
 
     return (
-        <div>
+        
+        <div className="Friends">
             <h1>Your Current Friends:</h1>
             <form onSubmit={addNewFriend}>
                 <input 
@@ -73,11 +75,11 @@ export const FriendsList = () => {
                 <input type="submit"/>
                 <div className="FriendsList">
                     {friend.friends.map(person => {
-                       return <>
-                        <h3>{person.name}</h3>
-                        <p>{person.age}</p>
-                        <p>{person.email}</p>
-                        </>
+                return <Card style={{ backgroundColor: '#333', borderColor: '#333' }}>
+                        <CardHeader>Name: {person.name}</CardHeader>
+                        <CardText>Age: {person.age}</CardText>
+                        <CardText>Email: {person.email}</CardText>
+                        </Card>
                     })}
 
                 </div>
